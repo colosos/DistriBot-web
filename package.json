@@ -1,0 +1,30 @@
+{
+  "name": "redux-tutorial",
+  "version": "0.0.1",
+  "description": "a todo app that you'd never want to use",
+  "main": "index.js",
+  "scripts": {
+    "test": " ",
+    "start": "webpack-dev-server"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "Zach Silveira",
+  "license": "ISC",
+  "dependencies": {
+    "immutable": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "redux": "*",
+    "webpack": "*",
+    "webpack-dev-server": "*"
+  },
+  "devDependencies": {
+    "babel-core": "*",
+    "babel-loader": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-react": "*"
+  }
+}
