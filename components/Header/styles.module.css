@@ -1,0 +1,5 @@
+@import url("../../styles/base.css");
+
+.container {
+  border: 1px solid red;
+}

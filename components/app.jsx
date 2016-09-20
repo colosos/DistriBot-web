@@ -4,10 +4,10 @@ import { Provider } from 'react-redux'
 import store from '../store'
 import Todos from './todos'
 
-let reactElement = document.getElementById('react')
+let reactElement = document.getElementById('root')
 render(
   <Provider store={store}>
     <Todos />
   </Provider>,
   reactElement
-)
+);

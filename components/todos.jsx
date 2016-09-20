@@ -3,9 +3,11 @@ import { connect } from 'react-redux'
 
 import NewTodo from './NewTodo'
 import { addTodo, deleteTodo } from '../actions'
+import Header from './Header/Header'
 
 const Todos = ({todos, dispatch}) => (
   <div>
+    <Header />
     <h1>Todos</h1>
     <NewTodo onChange={e => {
       if(e.keyCode == 13){
