@@ -33,9 +33,8 @@ const findLoader = (loaders, match) => {
       l.loader && l.loader.match(match));
   return found ? found[0] : null;
 }
-// existing css loader
-const cssloader =
-  findLoader(config.module.loaders, matchCssLoaders);
+
+const cssloader = findLoader(config.module.loaders, matchCssLoaders);
 
 const newloader = Object.assign({}, cssloader, {
   test: /\.module\.css$/,
@@ -44,9 +43,9 @@ const newloader = Object.assign({}, cssloader, {
     .replace(matchCssLoaders,
     `$1$2?modules&localIdentName=${cssModulesNames}$3`)
 })
+
 config.module.loaders.push(newloader);
-cssloader.test =
-  new RegExp(`[^module]${cssloader.test.source}`)
+cssloader.test = new RegExp(`[^module]${cssloader.test.source}`)
 cssloader.loader = newloader.loader
 
 config.module.loaders.push({
