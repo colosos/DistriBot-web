@@ -1,0 +1,183 @@
+$light-red: #FF6F59;
+$pink: #F67787;
+$orange: #2271B3;
+$black: #4A4A4A;
+$dark-grey: #9B9B9B;
+$grey: #E6E6E6;
+$light-grey: #F7F7F7;
+
+.red-color {
+  color: red;
+}
+
+.green-color {
+  color: green;
+}
+
+.light-red-color {
+  color: $light-red  
+}
+
+.pink-color {
+  color: $pink
+}
+
+#app .orange-color {
+  color: $orange
+}
+
+#app .bg-orange-color {
+  background-color: $orange
+}
+
+.black-color {
+  color: $black 
+}
+
+.dark-grey-color {
+  color: $dark-grey 
+}
+
+.grey-color {
+  color: $grey 
+}
+
+.light-grey-color {
+  color: $light-grey 
+}
+
+#app {
+  font-family: 'Roboto', sans-serif;
+  .alert-danger{
+    padding: 5px;
+    font-size: x-small;
+  }
+  height: 100%;
+}
+
+#app > div {
+  height: 100%;
+}
+
+body {
+  background-color: $light-grey !important;
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+.login-box {
+  display: block;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 4px 4px 10px $grey;
+  border: 1px solid $grey;
+  margin: 50px 10px;
+  padding: 30px;
+}
+
+.content {
+  min-height: 100%;
+  margin-bottom: -50px;
+}
+
+.content:after {
+  content: "";
+  display: block;
+}
+
+.footer, .content:after {
+  height: 50px; 
+  text-align: center;
+}
+
+.row {
+  margin: 0 !important;
+}
+
+.m-bot30 {
+  margin-bottom: 30px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.not-border {
+  border: none;
+}
+
+.center {
+  display: table;
+  margin: 0 auto;
+}
+
+#app .page {
+  position: relative;
+  padding: 20px;
+}
+
+.p-relative {
+  position: relative;
+}
+
+.spinner-div {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  cursor: wait;
+  
+  .spinner-icon {
+    display: inline-block;
+  }
+
+  .three-bounce > div{
+    background-color: $orange;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.spinner-div:before  {
+  content: "";
+  display: block;
+  height: 50%;
+  max-height: 200px;
+}
+
+#app button, input[type=button] {
+  outline: none;
+}

@@ -1,0 +1,22 @@
+.contenedor-header {
+  display: table;
+  margin: 0 auto 10px auto;
+  font-weight: 300;
+
+  .title-header {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .image-header {
+    display: table;
+    margin: 0 auto;
+    width: 80%;
+  }
+
+  .title {
+    text-align: center;
+    color: #222;
+  }
+}
