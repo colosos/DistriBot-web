@@ -16,12 +16,12 @@ const LoginForm = ({ form, error, onChange, loading, onSubmit }) => {
         <div className="user-form">
           {error && <div className="alert alert-danger">{error}</div>}
           <Input styleClass="user-input"
-                  label="Email"
+                  label="Nombre de usuario"
                   type="text"
-                  name="email"
-                  value={form.email.value}
+                  name="username"
+                  value={form.username.value}
                   onChange={onChange}
-                  error={form.email.error}/>
+                  error={form.username.error}/>
           <Input styleClass="user-input"
                   label="Contraseña"
                   type="password"
