@@ -4,6 +4,8 @@ import user from './userReducer';
 import serverStatus from './serverStatusReducer';
 import login from './loginReducer';
 import userForm from './userFormReducer';
+import sales from './salesReducer';
+import products from './productsReducer';
 import { reducer as toastrReducer } from 'react-redux-toastr';
 
 const rootReducer = combineReducers({
@@ -11,6 +13,8 @@ const rootReducer = combineReducers({
   serverStatus,
   login,
   userForm,
+  sales,
+  products,
   toastr: toastrReducer,
   routing: routerReducer
 });

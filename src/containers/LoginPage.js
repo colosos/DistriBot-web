@@ -19,7 +19,7 @@ class LoginPage extends Component {
     };
 
     this.form = {
-      email: { value: '' },
+      username: { value: '' },
       pass: { value: '' }
     };
 
@@ -37,13 +37,10 @@ class LoginPage extends Component {
     this.setState({ loading: true });
     let error = false;
     let form = this.form;
-    delete form.email.error;
+    delete form.username.error;
     delete form.pass.error;
-    if (form.email.value == '') {
-      form.email.error = message.ERROR_REQUIRED_FIELD;
-      error = true;
-    } else if (!StringV.isEmail(form.email.value)) {
-      form.email.error = message.ERROR_EMAIL;
+    if (form.username.value == '') {
+      form.username.error = message.ERROR_REQUIRED_FIELD;
       error = true;
     }
     if (form.pass.value == '') {
@@ -53,7 +50,7 @@ class LoginPage extends Component {
     if (!error) {
       let user = { user:
                     {
-                        email: form.email.value,
+                        username: form.username.value,
                         password: form.pass.value
                     }
                   };
