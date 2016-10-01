@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import * as saleActions from '../actions/saleActions';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../styles/presales.scss';
+import { priceFormatter, dateFormatter } from '../util/dataFormatter'
+import { dateSorter } from '../util/dataSorter'
 
 class PresalePage extends Component {
   constructor(props, context) {
@@ -12,21 +14,6 @@ class PresalePage extends Component {
 
   componentWillMount() {
     this.props.actions.loadSales();
-  }
-
-  priceFormatter(cell){
-    return '<i class="glyphicon glyphicon-usd"></i> ' + cell;
-  }
-
-  dateFormatter(cell){
-    /*Esto parece que esta convirtiendo teniendo en cuenta
-    el timezone. Luego que se obtenga la fecha del backend
-    se va a testear este metodo para ver si funciona bien.*/
-    const date = new Date(cell);
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    return day + '/' + month + '/' + year;
   }
 
   render() {
@@ -68,22 +55,15 @@ class PresalePage extends Component {
       price: 100
     }];
 
-    function dateSorter(a, b, order) {
-      if (order === 'asc') {
-        return new Date(a.date) - new Date(b.date);
-      }
-      return new Date(b.date) - new Date(a.date);      
-    }
-
     return (
       <div className="table-wrapper">
         <BootstrapTable data={sales} striped={true} hover={true} search={true} pagination={true}>
           <TableHeaderColumn dataField="id" isKey={true} dataSort={true}>ID Venta</TableHeaderColumn>
-          <TableHeaderColumn dataField="date" sortFunc={dateSorter} dataSort={true} dataFormat={this.dateFormatter}>Fecha</TableHeaderColumn>
+          <TableHeaderColumn dataField="date" sortFunc={dateSorter} dataSort={true} dataFormat={dateFormatter}>Fecha</TableHeaderColumn>
           <TableHeaderColumn dataField="seller" dataSort={true}>Vendedor</TableHeaderColumn>
           <TableHeaderColumn dataField="productId" dataSort={true}>ID Producto</TableHeaderColumn>
           <TableHeaderColumn dataField="product" dataSort={true}>Producto</TableHeaderColumn>
-          <TableHeaderColumn dataField="price" dataSort={true} dataFormat={this.priceFormatter}>Monto</TableHeaderColumn>
+          <TableHeaderColumn dataField="price" dataSort={true} dataFormat={priceFormatter}>Monto</TableHeaderColumn>
         </BootstrapTable>
       </div>
     );
