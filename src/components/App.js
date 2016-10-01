@@ -1,4 +1,3 @@
-// This component handles the App template used on every page.
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Footer from './common/Footer.js';
