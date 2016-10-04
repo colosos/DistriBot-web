@@ -109,6 +109,19 @@ class Api {
     requestData.headers = Object.assign({}, requestData.headers, this.addTokenHeader());
     return this.performRequest(uri, requestData);
   }
+
+  postLogin(uri, data) {
+    let requestData = {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: JSON.stringify(data)
+    };
+    requestData.headers = Object.assign({}, requestData.headers, this.addTokenHeader());
+    return this.performRequest(uri, requestData);
+  }
 }
 
 export default new Api();
