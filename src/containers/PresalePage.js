@@ -6,10 +6,31 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../styles/presales.scss';
 import { priceFormatter, dateFormatter } from '../util/dataFormatter'
 import { dateSorter } from '../util/dataSorter'
+import Notifications from 'react-notification-system-redux';
+
+const notificationOpts = {
+  // uid: 'once-please', // you can specify your own uid if required
+  title: 'Hey, it\'s good to see you!',
+  message: 'Now you can see how easy it is to use notifications in React!',
+  position: 'tr',
+  autoDismiss: 0,
+  action: {
+    label: 'Click me!!',
+    callback: () => alert('clicked!')
+  }
+};
 
 class PresalePage extends Component {
   constructor(props, context) {
     super(props, context);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.context.store.dispatch(
+      Notifications.success(notificationOpts)
+    );
   }
 
   componentWillMount() {
@@ -18,6 +39,9 @@ class PresalePage extends Component {
 
   render() {
     //const { sales } = this.props;
+
+    const { notifications } = this.props;
+
     const sales = [{
       id: 1,
       date: '2016-07-01',
@@ -65,6 +89,10 @@ class PresalePage extends Component {
           <TableHeaderColumn dataField="product" dataSort={true}>Producto</TableHeaderColumn>
           <TableHeaderColumn dataField="price" dataSort={true} dataFormat={priceFormatter}>Monto</TableHeaderColumn>
         </BootstrapTable>
+
+        <button onClick={this.handleClick}>
+          Spawn some notifications!!!
+        </button>
       </div>
     );
   }
@@ -75,6 +103,10 @@ const { array, object } = PropTypes;
 PresalePage.propTypes = {
   sales: array.isRequired,
   actions: object.isRequired
+};
+
+PresalePage.contextTypes = {
+  store: PropTypes.object
 };
 
 const mapState = (state) => ({ sales: state.sales });

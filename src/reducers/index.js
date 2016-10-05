@@ -7,6 +7,7 @@ import userForm from './userFormReducer';
 import sales from './salesReducer';
 import products from './productsReducer';
 import { reducer as toastrReducer } from 'react-redux-toastr';
+import { reducer as notifications } from 'react-notification-system-redux';
 
 const rootReducer = combineReducers({
   user,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   userForm,
   sales,
   products,
+  notifications,
   toastr: toastrReducer,
   routing: routerReducer
 });
