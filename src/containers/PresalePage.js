@@ -6,78 +6,79 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../styles/presales.scss';
 import { priceFormatter, dateFormatter } from '../util/dataFormatter'
 import { dateSorter } from '../util/dataSorter'
-import Notifications from 'react-notification-system-redux';
 
-const notificationOpts = {
-  // uid: 'once-please', // you can specify your own uid if required
-  title: 'Hey, it\'s good to see you!',
-  message: 'Now you can see how easy it is to use notifications in React!',
-  position: 'tr',
-  autoDismiss: 0,
-  action: {
-    label: 'Click me!!',
-    callback: () => alert('clicked!')
-  }
-};
+//import Notifications from 'react-notification-system-redux';
+
+// const notificationOpts = {
+//   // uid: 'once-please', // you can specify your own uid if required
+//   title: 'Hey, it\'s good to see you!',
+//   message: 'Now you can see how easy it is to use notifications in React!',
+//   position: 'tr',
+//   autoDismiss: 0,
+//   action: {
+//     label: 'Click me!!',
+//     callback: () => alert('clicked!')
+//   }
+// };
 
 class PresalePage extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleClick = this.handleClick.bind(this);
+    //this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    this.context.store.dispatch(
-      Notifications.success(notificationOpts)
-    );
-  }
+  // handleClick() {
+  //   this.context.store.dispatch(
+  //     Notifications.error(notificationOpts)
+  //   );
+  // }
 
   componentWillMount() {
     this.props.actions.loadSales();
   }
 
   render() {
-    //const { sales } = this.props;
+    const { sales } = this.props;
 
-    const { notifications } = this.props;
+    //const { notifications } = this.props;
 
-    const sales = [{
-      id: 1,
-      date: '2016-07-01',
-      seller: "Vendedor 1",
-      productId: "123",
-      product: "Azucar",
-      price: 100
-    },{
-      id: 2,
-      date: '2016-07-03',
-      seller: "Vendedor 2",
-      productId: "456",
-      product: "Naranja",
-      price: 120
-    },{
-      id: 3,
-      date: '2016-09-15',
-      seller: "Vendedor 1",
-      productId: "2345",
-      product: "Limon",
-      price: 100
-    },{
-      id: 4,
-      date: '2016-06-30',
-      seller: "Vendedor 1",
-      productId: "767",
-      product: "Banana",
-      price: 86
-    },{
-      id: 5,
-      date: '2017-04-02',
-      seller: "Vendedor 2",
-      productId: "123",
-      product: "Azucar",
-      price: 100
-    }];
+    // const sales = [{
+    //   id: 1,
+    //   date: '2016-07-01',
+    //   seller: "Vendedor 1",
+    //   productId: "123",
+    //   product: "Azucar",
+    //   price: 100
+    // },{
+    //   id: 2,
+    //   date: '2016-07-03',
+    //   seller: "Vendedor 2",
+    //   productId: "456",
+    //   product: "Naranja",
+    //   price: 120
+    // },{
+    //   id: 3,
+    //   date: '2016-09-15',
+    //   seller: "Vendedor 1",
+    //   productId: "2345",
+    //   product: "Limon",
+    //   price: 100
+    // },{
+    //   id: 4,
+    //   date: '2016-06-30',
+    //   seller: "Vendedor 1",
+    //   productId: "767",
+    //   product: "Banana",
+    //   price: 86
+    // },{
+    //   id: 5,
+    //   date: '2017-04-02',
+    //   seller: "Vendedor 2",
+    //   productId: "123",
+    //   product: "Azucar",
+    //   price: 100
+    // }];
 
     return (
       <div className="table-wrapper">
@@ -89,10 +90,6 @@ class PresalePage extends Component {
           <TableHeaderColumn dataField="product" dataSort={true}>Producto</TableHeaderColumn>
           <TableHeaderColumn dataField="price" dataSort={true} dataFormat={priceFormatter}>Monto</TableHeaderColumn>
         </BootstrapTable>
-
-        <button onClick={this.handleClick}>
-          Spawn some notifications!!!
-        </button>
       </div>
     );
   }

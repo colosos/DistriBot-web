@@ -3,7 +3,7 @@ import * as consts from '../constants/apiConstants.js';
 
 class Login {
   static postLogin(userLogin) {
-    return api.postLogin(`${consts.API_URL}/api/login`, userLogin);
+    return api.postLogin(`${consts.API_URL}api/login`, userLogin);
   }
 }
 

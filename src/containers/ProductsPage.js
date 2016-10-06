@@ -17,33 +17,7 @@ class ProductsPage extends Component {
   }
 
   render() {
-    //const { products } = this.props;
-    const products = [{
-      id: 1,
-      date: '2016-07-01',
-      name: "Azucar",
-      price: 100
-    },{
-      id: 2,
-      date: '2016-07-03',
-      name: "Naranja",
-      price: 120
-    },{
-      id: 3,
-      date: '2016-09-15',
-      name: "Limon",
-      price: 100
-    },{
-      id: 4,
-      date: '2016-06-30',
-      name: "Banana",
-      price: 86
-    },{
-      id: 5,
-      date: '2017-04-02',
-      name: "Yerba",
-      price: 100
-    }];
+    const { products } = this.props;
 
     return (
       <div className="table-wrapper">

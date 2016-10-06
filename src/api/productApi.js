@@ -3,7 +3,7 @@ import * as consts from '../constants/apiConstants.js';
 
 class ProductApi {
   static getMissingProducts() {
-    return api.get(`${consts.API_STAGING_URL}/missing_products`);
+    return api.get(`${consts.API_URL}api/Products?desde=1&cantidad=100`);
   }
 }
 
