@@ -26,7 +26,6 @@ class ProductsPage extends Component {
           <TableHeaderColumn dataField="id" isKey={true} dataSort={true}>ID</TableHeaderColumn>
           <TableHeaderColumn dataField="name" dataSort={true}>Producto</TableHeaderColumn>
           <TableHeaderColumn dataField="date" sortFunc={dateSorter} dataSort={true} dataFormat={dateFormatter}>Fecha</TableHeaderColumn>
-          <TableHeaderColumn dataField="price" dataSort={true} dataFormat={priceFormatter}>Monto</TableHeaderColumn>
         </BootstrapTable>
         <p>*El campo "fecha" de la tabla muestra cuando se va a entregar el producto en cuestión.</p>
       </div>

@@ -117,7 +117,7 @@ class Api {
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: JSON.stringify(data)
+      body: data
     };
     requestData.headers = Object.assign({}, requestData.headers, this.addTokenHeader());
     return this.performRequest(uri, requestData);

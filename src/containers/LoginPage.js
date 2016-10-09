@@ -48,13 +48,7 @@ class LoginPage extends Component {
       error = true;
     }
     if (!error) {
-      let user = { user:
-                    {
-                        username: form.username.value,
-                        password: form.pass.value,
-                        grant_type: 'password'
-                    }
-                  };
+      let user = "username="+form.username.value+"&grant_type=password"+"&password="+form.pass.value;
       this.props.actions.login(user, this.context.router);
     } else {
       this.setState({ loading: false });
