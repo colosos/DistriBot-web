@@ -51,7 +51,8 @@ class LoginPage extends Component {
       let user = { user:
                     {
                         username: form.username.value,
-                        password: form.pass.value
+                        password: form.pass.value,
+                        grant_type: 'password'
                     }
                   };
       this.props.actions.login(user, this.context.router);

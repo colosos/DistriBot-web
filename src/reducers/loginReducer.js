@@ -5,7 +5,7 @@ export default function loginReducer(state = initialState.login, action) {
 
   switch (action.type) {
       case types.LOGIN_USER_SUCCESS: {
-        return { token: action.response['user-token'] };
+        return { token: action.response['token'], role:  action.response['role'] };
       }
       case types.LOGIN_USER_ERROR: {
         if (action.response.error)
