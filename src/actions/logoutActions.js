@@ -1,5 +1,4 @@
 import * as types from './actionTypes';
-import logoutApi from '../api/loginApi';
 import * as session from './sessionActions';
 
 export function logout() {
@@ -8,14 +7,8 @@ export function logout() {
 
 export const logoutDispatch = (history) => {
   return (dispatch) => {
-    logoutApi.deleteLogout().then(() => {
-      session.deleteSession();
-      history.push('/login');
-      dispatch(logout());
-    }).catch(() => {
-      session.deleteSession();
-      history.push('/login');
-      dispatch(logout());
-    });
+    session.deleteSession();
+    history.push('/login');
+    dispatch(logout());
   };
 };
