@@ -5,7 +5,7 @@ const salesReducer = (state = initialState.sales, action) => {
 
   switch (action.type) {
     case types.LOAD_SALES_SUCCESS:
-      return action.response.sales;
+      return action.response;
     default:
       return state;
   }
