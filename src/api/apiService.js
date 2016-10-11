@@ -44,7 +44,7 @@ class Api {
 
   addTokenHeader() {
       let current_session = session.loadSession();
-      return (current_session && current_session.token) ? { 'X-USER-TOKEN': current_session.token } : {};
+      return (current_session && current_session.token) ? { 'Authorization': current_session.access_token } : {};
   }
 
   get(uri) {
@@ -117,7 +117,7 @@ class Api {
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: JSON.stringify(data)
+      body: data
     };
     requestData.headers = Object.assign({}, requestData.headers, this.addTokenHeader());
     return this.performRequest(uri, requestData);

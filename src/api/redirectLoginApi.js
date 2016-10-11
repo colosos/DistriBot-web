@@ -11,7 +11,7 @@ export const CheckAuth = (nextState, replace) => {
 
 export const isLogged = () => {
   let current_session = session.loadSession();
-  return (current_session && current_session.email && current_session.token);
+  return (current_session && current_session.access_token && current_session.role);
 };
 
 export const CheckIfUnlogged = (nextState, replace) => {

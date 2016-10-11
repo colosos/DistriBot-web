@@ -12,8 +12,8 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute onEnter={auth.CheckAuth} component={HomePage}/>
     <Route path="login" onEnter={auth.CheckIfUnlogged} component={LoginPage}/>
-    <Route path="estadisticas" component={DashboardPage}/>
-    <Route path="preventa" component={PresalePage}/>
-    <Route path="faltantes" component={ProductsPage}/>
+    <Route path="estadisticas" onEnter={auth.CheckAuth} component={DashboardPage}/>
+    <Route path="preventa" onEnter={auth.CheckAuth} component={PresalePage}/>
+    <Route path="faltantes" onEnter={auth.CheckAuth} component={ProductsPage}/>
   </Route>
 );
