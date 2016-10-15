@@ -17,3 +17,13 @@ export const loadSales = () => {
     });
   };
 };
+
+export const loadPreSales = () => {
+  return (dispatch) => {
+    return saleApi.getPreSales().then(sales => {
+      dispatch(loadSalesSuccess(sales));
+    }).catch(err => {
+      throw (err);
+    });
+  };
+};
