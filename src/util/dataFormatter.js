@@ -18,7 +18,3 @@ export const salesmanFormatter = (salesman) => {
 	const { userName } = salesman
 	return userName;
 };
-
-export const productsLinkFormatter = (idSale) => {
-	return '<ModalEmitter>ver productos</ModalEmitter>'
-};

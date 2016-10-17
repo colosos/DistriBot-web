@@ -14,5 +14,6 @@ export default {
   animal: {},
   animals: [],
   sales: [],
+  sale: {},
   products: []
 };
