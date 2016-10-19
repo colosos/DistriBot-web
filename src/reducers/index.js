@@ -4,8 +4,8 @@ import user from './userReducer';
 import login from './loginReducer';
 import userForm from './userFormReducer';
 import sales from './salesReducer';
+import sale from './saleReducer';
 import products from './productsReducer';
-import { reducer as toastrReducer } from 'react-redux-toastr';
 import { reducer as notifications } from 'react-notification-system-redux';
 
 const rootReducer = combineReducers({
@@ -13,9 +13,9 @@ const rootReducer = combineReducers({
   login,
   userForm,
   sales,
+  sale,
   products,
   notifications,
-  toastr: toastrReducer,
   routing: routerReducer
 });
 

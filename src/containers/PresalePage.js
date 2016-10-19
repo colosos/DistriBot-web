@@ -4,9 +4,13 @@ import { bindActionCreators } from 'redux';
 import * as saleActions from '../actions/saleActions';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../styles/presales.scss';
-import { priceFormatter, dateFormatter } from '../util/dataFormatter'
+import { priceFormatter,
+         dateFormatter,
+         clientFormatter,
+         salesmanFormatter } from '../util/dataFormatter'
 import { dateSorter } from '../util/dataSorter'
 import Spinner from '../components/common/SpinnerComponent';
+import SaleDetails from '../components/sale/SaleDetails';
 
 //import Notifications from 'react-notification-system-redux';
 
@@ -27,13 +31,14 @@ class PresalePage extends Component {
     super(props, context);
 
     this.state = {
-      loading: true
+      loading: true,
+      showingDetails: false,
+      orderId: 0
     };
 
     //this.handleClick = this.handleClick.bind(this);
+    this.onRowSelect = this.onRowSelect.bind(this);
   }
-
-  
 
   // handleClick() {
   //   this.context.store.dispatch(
@@ -42,7 +47,7 @@ class PresalePage extends Component {
   // }
 
   componentWillMount() {
-    this.props.actions.loadSales();
+    this.props.actions.loadPreSales();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,23 +56,41 @@ class PresalePage extends Component {
     }
   }
 
+  onRowSelect(row, isSelected) {
+    let orderId = row.id;
+    this.setState({ showingDetails: true, orderId: orderId });
+  }
+
+  onCloseModal() {
+    this.setState({ showingDetails: false });
+  }
+
   render() {
     const { sales } = this.props;
 
     //const { notifications } = this.props;
 
+    var selectRowProp = {
+      mode: "radio",
+      clickToSelect: true,
+      bgColor: "rgb(238, 193, 213)",
+      onSelect: this.onRowSelect
+    };
+
     return (
-      <div className="table-wrapper">
-        { this.state.loading ? (<Spinner active={ this.state.loading } />) : (
-        <BootstrapTable data={sales} striped={true} hover={true} search={true} pagination={true}>
-          <TableHeaderColumn dataField="id" isKey={true} dataSort={true}>ID Venta</TableHeaderColumn>
-          <TableHeaderColumn dataField="date" sortFunc={dateSorter} dataSort={true} dataFormat={dateFormatter}>Fecha</TableHeaderColumn>
-          <TableHeaderColumn dataField="seller" dataSort={true}>Vendedor</TableHeaderColumn>
-          <TableHeaderColumn dataField="productId" dataSort={true}>ID Producto</TableHeaderColumn>
-          <TableHeaderColumn dataField="product" dataSort={true}>Producto</TableHeaderColumn>
-          <TableHeaderColumn dataField="price" dataSort={true} dataFormat={priceFormatter}>Monto</TableHeaderColumn>
-        </BootstrapTable>
-        )}
+      <div>
+        <div className="table-wrapper">
+          { this.state.loading ? (<Spinner active={ this.state.loading } />) : (
+          <BootstrapTable data={sales} striped={true} hover={true} search={true} pagination={true} selectRow={selectRowProp}>
+            <TableHeaderColumn dataField="client" dataSort={true} dataFormat={clientFormatter}>Cliente</TableHeaderColumn>
+            <TableHeaderColumn dataField="id" isKey={true} dataSort={true}>ID Venta</TableHeaderColumn>
+            <TableHeaderColumn dataField="creationDate" sortFunc={dateSorter} dataSort={true} dataFormat={dateFormatter}>Fecha</TableHeaderColumn>
+            <TableHeaderColumn dataField="salesman" dataSort={true} dataFormat={salesmanFormatter}>Vendedor</TableHeaderColumn>
+            <TableHeaderColumn dataField="price" dataSort={true} dataFormat={priceFormatter}>Monto</TableHeaderColumn>
+          </BootstrapTable>
+          )}
+        </div>
+        { this.state.showingDetails ? (<SaleDetails orderId={ this.state.orderId } onClose={ this.onCloseModal.bind(this) } />) : "" }
       </div>
     );
   }

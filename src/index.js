@@ -9,7 +9,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import './styles/styles.scss';
 import { showLoginUser } from './actions/userActions';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import ReduxToastr from 'react-redux-toastr';
 import { useScroll } from 'react-router-scroll';
 
 const store = configureStore();
@@ -23,10 +22,6 @@ render(
   <Provider store={store}>
     <div>
       <Router history={history} routes={routes} render={applyRouterMiddleware(useScroll())}/>
-      <ReduxToastr
-        timeOut={4000}
-        newestOnTop={false}
-        position="top-right"/>
     </div>
   </Provider>, document.getElementById('app')
 );
