@@ -2,10 +2,11 @@ import * as types from './actionTypes';
 import loginApi from '../api/loginApi';
 import * as session from './sessionActions';
 
-export const loginUser = (response) => {
+export const loginUser = (user, response) => {
   return {
       type: types.LOGIN_USER_SUCCESS,
-      response
+      response,
+      user: user
   };
 };
 
@@ -21,7 +22,7 @@ export const login = (user, history) => {
     loginApi.postLogin(user).then(response => {
         session.saveSession(response);
         history.push(`/`);
-        dispatch(loginUser(response));
+        dispatch(loginUser(user, response));
       },
       error => {
         dispatch(loginError(error));

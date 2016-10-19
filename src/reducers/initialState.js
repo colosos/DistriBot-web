@@ -1,6 +1,10 @@
 export default {
   user: {},
-  login: {},
+  login: {
+    user: {},
+    role: '',
+    token: ''
+  },
   userForm: {},
   resetPass: {},
   species: [],
@@ -15,5 +19,5 @@ export default {
   animals: [],
   sales: [],
   sale: {},
-  products: []
+  products: [],
 };

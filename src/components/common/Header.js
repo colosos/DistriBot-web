@@ -20,12 +20,6 @@ class Header extends Component {
     this.onClickLink = this.onClickLink.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.user.first_name) {
-      this.props.userActions.showLoginUser();
-    }
-  }
-
   onClickLogout() {
     this.props.logoutActions.logoutDispatch(this.context.router);
   }
@@ -79,7 +73,7 @@ class Header extends Component {
           <ul className="nav navbar-nav navbar-right">
             <Link to="/perfil" onClick={this.onClickLink}>
               <i className="material-icons">account_circle</i>
-              <span className="header-span"> Hola {this.props.user.first_name}</span>
+              <span className="header-span"> Hola {this.props.loginObj.user.username}</span>
             </Link>
               <span className="header-span">&nbsp;|&nbsp;</span>
             <button className="logout-button" onClick={this.onClickLogout}>SALIR</button>
@@ -95,14 +89,14 @@ const { object } = PropTypes;
 Header.propTypes = {
   logoutActions: object.isRequired,
   userActions: object.isRequired,
-  user: object.isRequired
+  loginObj: object.isRequired
 };
 
 Header.contextTypes = {
   router: object
 };
 
-const mapState = () => ({});
+const mapState = (state) => ({ loginObj: state.login });
 
 const mapDispatch = (dispatch) => {
   return {
