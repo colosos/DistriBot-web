@@ -20,7 +20,7 @@ export const loginError = (response) => {
 export const login = (user, history) => {
   return (dispatch) => {
     loginApi.postLogin(user).then(response => {
-        session.saveSession(response);
+        session.saveSession(response, user);
         history.push(`/`);
         dispatch(loginUser(user, response));
       },

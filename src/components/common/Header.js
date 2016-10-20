@@ -5,6 +5,7 @@ import { Navbar, Image } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import * as logoutActions from '../../actions/logoutActions';
 import * as userActions from '../../actions/userActions';
+import * as session from '../../actions/sessionActions';
 import '../../styles/header.scss';
 
 class Header extends Component {
@@ -12,7 +13,7 @@ class Header extends Component {
     super(props, context);
 
     this.state = {
-      toggleMenu: false
+      toggleMenu: false,
     };
 
     this.onClickLogout = this.onClickLogout.bind(this);
@@ -35,6 +36,7 @@ class Header extends Component {
   }
 
   render() {
+    const username = session.loadCurrentUser();
     return (
       <Navbar className="bg-orange-color" expanded={this.state.toggleMenu} onToggle={this.onToggle}>
         <Navbar.Header>
@@ -73,7 +75,7 @@ class Header extends Component {
           <ul className="nav navbar-nav navbar-right">
             <Link to="/perfil" onClick={this.onClickLink}>
               <i className="material-icons">account_circle</i>
-              <span className="header-span"> Hola {this.props.loginObj.user.username}</span>
+              <span className="header-span"> Hola {username}</span>
             </Link>
               <span className="header-span">&nbsp;|&nbsp;</span>
             <button className="logout-button" onClick={this.onClickLogout}>SALIR</button>
@@ -89,14 +91,13 @@ const { object } = PropTypes;
 Header.propTypes = {
   logoutActions: object.isRequired,
   userActions: object.isRequired,
-  loginObj: object.isRequired
 };
 
 Header.contextTypes = {
   router: object
 };
 
-const mapState = (state) => ({ loginObj: state.login });
+const mapState = () => ({});
 
 const mapDispatch = (dispatch) => {
   return {
