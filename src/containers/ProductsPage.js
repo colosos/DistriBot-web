@@ -4,16 +4,54 @@ import { bindActionCreators } from 'redux';
 import * as productsActions from '../actions/productActions';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../styles/products.scss';
-import { priceFormatter, dateFormatter } from '../util/dataFormatter'
-import { dateSorter } from '../util/dataSorter'
+import DatePicker from 'react-datepicker';
+import Spinner from '../components/common/SpinnerComponent';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.min.css';
 
 class ProductsPage extends Component {
   constructor(props, context) {
     super(props, context);
+
+    this.state = {
+      date: moment(),
+      loading: true
+    };
   }
 
   componentWillMount() {
-    this.props.actions.loadMissingProducts();
+    this.props.actions.loadMissingProducts(this.dateToRequest());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.products) {
+      this.setState( { loading: false } );
+    }
+  }
+
+  handleChangeDate(newDate) {
+    this.setState({
+      date: newDate,
+      loading: true
+    },
+    function() {
+      this.props.actions.loadMissingProducts(this.dateToRequest());
+    });
+  }
+
+  dateToRequest() {
+    return moment(this.state.date).format('YYYY/MM/DD');
+  }
+
+  productsToShow(productList) {
+    let listToShow = [];
+    for (let product of productList) {
+      listToShow.push({ quantity: (product.quantity + " " + product.product.unit),
+                        name: product.product.name,
+                        id: product.id });
+    }
+
+    return listToShow;
   }
 
   render() {
@@ -22,12 +60,22 @@ class ProductsPage extends Component {
     return (
       <div className="table-wrapper">
         <h2>Lista de productos faltantes</h2>
-        <BootstrapTable data={products} striped={true} hover={true} search={true} pagination={true}>
+        <p>
+        Aquí ud podrá consultar los productos y la cantidad que necesita comprar,
+        para poder cumplir con las entregas acordadas hasta la fecha que indique en el siguiente campo:
+        </p>
+        <DatePicker
+          selected={this.state.date}
+          onChange={this.handleChangeDate.bind(this)}
+          dateFormat="DD/MM/YYYY"
+          />
+        {this.state.loading ? (<Spinner active={this.state.loading} />) : (
+        <BootstrapTable data={this.productsToShow(products)} striped={true} hover={true} search={true} pagination={true}>
           <TableHeaderColumn dataField="id" isKey={true} dataSort={true}>ID</TableHeaderColumn>
           <TableHeaderColumn dataField="name" dataSort={true}>Producto</TableHeaderColumn>
-          <TableHeaderColumn dataField="date" sortFunc={dateSorter} dataSort={true} dataFormat={dateFormatter}>Fecha</TableHeaderColumn>
+          <TableHeaderColumn dataField="quantity" dataSort={true}>Cantidad</TableHeaderColumn>
         </BootstrapTable>
-        <p>*El campo "fecha" de la tabla muestra cuando se va a entregar el producto en cuestión.</p>
+        )}
       </div>
     );
   }

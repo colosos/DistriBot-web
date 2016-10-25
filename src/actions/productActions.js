@@ -8,9 +8,9 @@ export const loadProductsSuccess = (response) => {
   };
 };
 
-export const loadMissingProducts = () => {
+export const loadMissingProducts = (date) => {
   return (dispatch) => {
-    return productApi.getMissingProducts().then(products => {
+    return productApi.getMissingProducts(date).then(products => {
       dispatch(loadProductsSuccess(products));
     }).catch(err => {
       throw (err);
