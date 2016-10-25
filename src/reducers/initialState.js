@@ -1,9 +1,11 @@
 export default {
   user: {},
-  login: {},
+  login: {
+    user: {},
+    role: '',
+    token: ''
+  },
   userForm: {},
-  resetPass: {},
-  species: [],
   animalForm: {
     errors: '',
     success: false,
@@ -11,9 +13,7 @@ export default {
     sended_images: 0,
     id: ''
   },
-  animal: {},
-  animals: [],
   sales: [],
   sale: {},
-  products: []
+  products: [],
 };

@@ -46,27 +46,29 @@ class SaleDetails extends Component {
       <Modal.Dialog>
         { this.state.loading ? (<Spinner active={ this.state.loading } />) : (
           <div>
-            <Modal.Header>
-              <Modal.Title>{ sale.client.name }</Modal.Title>
-            </Modal.Header>
+            <Modal show={ true }>
+              <Modal.Header>
+                <Modal.Title>{ sale.client.name }</Modal.Title>
+              </Modal.Header>
 
-            <Modal.Body>
-              <h3>Productos:</h3>
-              <BootstrapTable data={ this.cleanSaleData(sale.productsList) } striped={true}>
-                <TableHeaderColumn isKey={true} dataField="id">Id</TableHeaderColumn>      
-                <TableHeaderColumn dataField="name">Producto</TableHeaderColumn>
-                <TableHeaderColumn dataField="quantity">Cantidad</TableHeaderColumn>
-                <TableHeaderColumn dataField="price" dataFormat={priceFormatter}>Precio</TableHeaderColumn>
-              </BootstrapTable>
-              <br/>
-              <h4>Precio total: { sale.price }</h4>
-              <br/>
-              <h5>Vendedor: { sale.salesman.name } ({ sale.salesman.userName })</h5>
-            </Modal.Body>
+              <Modal.Body>
+                <h3>Productos:</h3>
+                <BootstrapTable data={ this.cleanSaleData(sale.productsList) } striped={true}>
+                  <TableHeaderColumn isKey={true} dataField="id">Id</TableHeaderColumn>      
+                  <TableHeaderColumn dataField="name">Producto</TableHeaderColumn>
+                  <TableHeaderColumn dataField="quantity">Cantidad</TableHeaderColumn>
+                  <TableHeaderColumn dataField="price" dataFormat={priceFormatter}>Precio</TableHeaderColumn>
+                </BootstrapTable>
+                <br/>
+                <h4>Precio total: { sale.price }</h4>
+                <br/>
+                <h5>Vendedor: { sale.salesman.name } ({ sale.salesman.userName })</h5>
+              </Modal.Body>
 
-            <Modal.Footer>
-              <Button onClick={ this.state.onClose }>Cerrar</Button>
-            </Modal.Footer>
+              <Modal.Footer>
+                <Button onClick={ this.state.onClose }>Cerrar</Button>
+              </Modal.Footer>
+            </Modal>  
           </div> 
         )}        
       </Modal.Dialog>
