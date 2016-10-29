@@ -1,4 +1,5 @@
 import * as session from '../actions/sessionActions';
+import moment from 'moment';
 
 export const CheckAuth = (nextState, replace) => {
   if (!isLogged()) {
@@ -38,12 +39,19 @@ export const CheckIfSupervisor = (nextState, replace) => {
 
 export const isLogged = () => {
   let current_session = session.loadSession();
-  return (current_session && current_session.access_token && current_session.role);
+  var expired = false
+  if (current_session) {
+    let now = moment();
+    let expires = moment(current_session['.expires'], "ddd, DD MMM YYYY HH:mm:ss z");
+    let diff = moment.utc((now).diff(expires));
+    expired = diff > 0;
+  }
+  return (current_session && current_session.access_token && current_session.role && !expired);
 };
 
 export const isManagerLogged = () => {
   let current_session = session.loadSession();
-  return (isLogged() && current_session.role == 'gerente');
+  return (isLogged() && current_session.role == 'manager');
 };
 
 export const isSupervisorLogged = () => {
