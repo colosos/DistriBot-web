@@ -60,7 +60,7 @@ class SaleDetails extends Component {
                   <TableHeaderColumn dataField="price" dataFormat={priceFormatter}>Precio</TableHeaderColumn>
                 </BootstrapTable>
                 <br/>
-                <h4>Precio total: { sale.price }</h4>
+                <h4>Precio total: ${ sale.price }</h4>
                 <br/>
                 <h5>Vendedor: { sale.salesman.name } ({ sale.salesman.userName })</h5>
               </Modal.Body>

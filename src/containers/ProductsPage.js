@@ -59,7 +59,7 @@ class ProductsPage extends Component {
 
     return (
       <div className="table-wrapper">
-        <h2>Lista de productos faltantes</h2>
+        <h2>Lista de productos faltantes para el { this.state.date.format("DD/MM/YYYY") }</h2>
         <p>
         Aquí ud podrá consultar los productos y la cantidad que necesita comprar,
         para poder cumplir con las entregas acordadas hasta la fecha que indique en el siguiente campo:
