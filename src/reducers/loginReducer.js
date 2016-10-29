@@ -13,7 +13,7 @@ export default function loginReducer(state = initialState.login, action) {
       }
       case types.LOGIN_USER_ERROR: {
         if (action.response.error)
-          return { errorLogin: action.response.error };
+          return { errorLogin: action.response.error_description };
         else if (action.response.errors)
           return { errorLogin: action.response.errors.join('<br/>') };
         return { errorLogin: 'Server Error' };

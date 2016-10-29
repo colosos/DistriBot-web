@@ -59,9 +59,9 @@ class Header extends Component {
           <ul className="nav navbar-nav item">
             <Link activeClassName="active-link"
                   className="header-link"
-                  to="/predicciones"
+                  to="/faltantes"
                   onClick={this.onClickLink}>
-              PREDICCIONES
+              FALTANTES
             </Link>
           </ul>
           <ul className="nav navbar-nav item">

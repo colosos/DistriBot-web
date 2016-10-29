@@ -1,4 +1,4 @@
-var moment = require('moment');
+import moment from 'moment';
 
 export const priceFormatter = (cell) => {
 	return '<i class="glyphicon glyphicon-usd"></i> ' + cell;
