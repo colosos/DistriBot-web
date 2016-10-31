@@ -54,7 +54,7 @@ class SaleDetails extends Component {
               <Modal.Body>
                 <h3>Productos:</h3>
                 <BootstrapTable data={ this.cleanSaleData(sale.productsList) } striped={true}>
-                  <TableHeaderColumn isKey={true} dataField="id">Id</TableHeaderColumn>      
+                  <TableHeaderColumn isKey={true} dataField="id">Código</TableHeaderColumn>      
                   <TableHeaderColumn dataField="name">Producto</TableHeaderColumn>
                   <TableHeaderColumn dataField="quantity">Cantidad</TableHeaderColumn>
                   <TableHeaderColumn dataField="price" dataFormat={priceFormatter}>Precio</TableHeaderColumn>
