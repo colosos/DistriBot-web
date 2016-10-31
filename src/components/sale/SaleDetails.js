@@ -54,13 +54,13 @@ class SaleDetails extends Component {
               <Modal.Body>
                 <h3>Productos:</h3>
                 <BootstrapTable data={ this.cleanSaleData(sale.productsList) } striped={true}>
-                  <TableHeaderColumn isKey={true} dataField="id">Id</TableHeaderColumn>      
+                  <TableHeaderColumn isKey={true} dataField="id">Código</TableHeaderColumn>      
                   <TableHeaderColumn dataField="name">Producto</TableHeaderColumn>
                   <TableHeaderColumn dataField="quantity">Cantidad</TableHeaderColumn>
                   <TableHeaderColumn dataField="price" dataFormat={priceFormatter}>Precio</TableHeaderColumn>
                 </BootstrapTable>
                 <br/>
-                <h4>Precio total: { sale.price }</h4>
+                <h4>Precio total: ${ sale.price }</h4>
                 <br/>
                 <h5>Vendedor: { sale.salesman.name } ({ sale.salesman.userName })</h5>
               </Modal.Body>

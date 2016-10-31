@@ -4,10 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as saleActions from '../actions/saleActions';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../styles/presales.scss';
-import { priceFormatter,
-         dateFormatter,
-         clientFormatter,
-         salesmanFormatter } from '../util/dataFormatter'
+import { priceFormatter, dateFormatter } from '../util/dataFormatter'
 import { dateSorter } from '../util/dataSorter'
 import Spinner from '../components/common/SpinnerComponent';
 import SaleDetails from '../components/sale/SaleDetails';
@@ -65,6 +62,20 @@ class PresalePage extends Component {
     this.setState({ showingDetails: false });
   }
 
+  salesToShow(salesList) {
+    let listToShow = [];
+    for (let sale of salesList) {
+      listToShow.push({ client: sale.client.name,
+                        id: sale.id,
+                        creationDate: sale.creationDate,
+                        salesman: sale.salesman.userName,
+                        price: sale.price
+                         });
+    }
+
+    return listToShow;
+  }
+
   render() {
     const { sales } = this.props;
 
@@ -81,11 +92,11 @@ class PresalePage extends Component {
       <div>
         <div className="table-wrapper">
           { this.state.loading ? (<Spinner active={ this.state.loading } />) : (
-          <BootstrapTable data={sales} striped={true} hover={true} search={true} pagination={true} selectRow={selectRowProp}>
-            <TableHeaderColumn dataField="client" dataSort={true} dataFormat={clientFormatter}>Cliente</TableHeaderColumn>
-            <TableHeaderColumn dataField="id" isKey={true} dataSort={true}>ID Venta</TableHeaderColumn>
+          <BootstrapTable data={ this.salesToShow(sales) } striped={true} hover={true} search={true} pagination={true} selectRow={selectRowProp}>
+            <TableHeaderColumn dataField="client" dataSort={true}>Cliente</TableHeaderColumn>
+            <TableHeaderColumn dataField="id" isKey={true} dataSort={true}>Código factura</TableHeaderColumn>
             <TableHeaderColumn dataField="creationDate" sortFunc={dateSorter} dataSort={true} dataFormat={dateFormatter}>Fecha</TableHeaderColumn>
-            <TableHeaderColumn dataField="salesman" dataSort={true} dataFormat={salesmanFormatter}>Vendedor</TableHeaderColumn>
+            <TableHeaderColumn dataField="salesman" dataSort={true}>Vendedor</TableHeaderColumn>
             <TableHeaderColumn dataField="price" dataSort={true} dataFormat={priceFormatter}>Monto</TableHeaderColumn>
           </BootstrapTable>
           )}
