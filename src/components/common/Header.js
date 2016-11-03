@@ -72,6 +72,14 @@ class Header extends Component {
               ESTADISTICAS
             </Link>
           </ul>
+          <ul className="nav navbar-nav item">
+            <Link activeClassName="active-link"
+                  className="header-link"
+                  to="/rutas"
+                  onClick={this.onClickLink}>
+              RUTAS DE REPARTO
+            </Link>
+          </ul>
           <ul className="nav navbar-nav navbar-right">
             <Link to="/perfil" onClick={this.onClickLink}>
               <i className="material-icons">account_circle</i>
