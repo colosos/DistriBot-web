@@ -9,7 +9,12 @@ class DashboardPage extends Component {
   render() {
     return (
       <div>
-        <p>Proximamente Estadisticas</p>
+        <iframe width="680"
+                height="510" 
+                src="https://app.powerbi.com/view?r=eyJrIjoiMTcxYTc0NzQtYTA5MS00N2FjLTllNDItMTlkZDJiOWY3ODVmIiwidCI6ImIxNDcxYmQyLTMxOTEtNDRjYS05NjI5LTk0OWMyOWQ4Zjg4YyIsImMiOjR9"
+                frameborder="0"
+                allowFullScreen="true">
+        </iframe>
       </div>
     );
   }

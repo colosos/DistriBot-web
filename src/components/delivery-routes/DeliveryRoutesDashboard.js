@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Icon } from 'react-fa'
 import { Col, Row } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import DeliveryRoutesModal from './DeliveryRoutesModal'
 import '../../styles/delivery-routes.scss'
 
 class DeliveryRoutesDashboard extends Component {
@@ -13,6 +15,7 @@ class DeliveryRoutesDashboard extends Component {
     };
 
     this.onOpen = this.onOpen.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,6 +41,10 @@ class DeliveryRoutesDashboard extends Component {
     this.setState({ showModal: true });
   }
 
+  onClose() {
+    this.setState({ showModal: false });
+  }
+
   render() {
     const { routes } = this.props;
 
@@ -53,6 +60,9 @@ class DeliveryRoutesDashboard extends Component {
           <TableHeaderColumn isKey={true} dataField="id">Código</TableHeaderColumn>      
           <TableHeaderColumn dataField="deliveryman">Repartidor</TableHeaderColumn>
         </BootstrapTable>
+        <Modal show={ this.state.showModal } onHide={ this.onClose } bsSize="large">
+          <DeliveryRoutesModal onClose={ this.onClose } title="Crear ruta" />
+        </Modal>
       </div>      
     );
   }

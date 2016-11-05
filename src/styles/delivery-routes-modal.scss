@@ -1,0 +1,29 @@
+#routes-modal {
+	.row {
+		margin: 0px 0px 10px 0px;
+
+		.col {
+			margin: 10px 0;
+		}
+	}
+
+	#clients-row {
+		.col {
+			text-align: center;
+		}
+	}
+
+	.react-datepicker__input-container {
+		width: 100%;
+	}
+
+	.list-item {
+		border: #ccc 1px solid;
+	    padding: 5px;
+	    margin: 0 0 5px 0;
+	}
+
+	.list-item.selected {
+		border: #df1f1f 2px solid;
+	}
+}
