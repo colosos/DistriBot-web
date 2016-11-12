@@ -16,5 +16,7 @@ export default {
   sales: [],
   sale: {},
   products: [],
-  routes: []
+  routes: [],
+  deliveryMen: [],
+  clients: []
 };

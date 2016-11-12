@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Spinner from 'react-spinkit';
 import { Col, Row } from 'react-bootstrap';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import ClientItem from '../common/ClientItem';
 import Select from 'react-select';
 import moment from 'moment';
 import Reorder from 'react-reorder';
+import * as deliveryMen from '../../actions/deliveryMenActions';
+import * as clients from '../../actions/clientsActions';
 import 'react-datepicker/dist/react-datepicker.min.css';
 import 'react-select/dist/react-select.css';
 import '../../styles/delivery-routes-modal.scss';
@@ -21,7 +25,8 @@ class DeliveryRoutesModal extends Component {
       clickedItem: '',
       clickedItem2: '',
       missingClients: [],
-      sortedClients: []
+      sortedClients: [],
+      allClients: []
     }
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -36,20 +41,20 @@ class DeliveryRoutesModal extends Component {
   }
 
   componentWillMount() {
-    //this.props.actions.loadSpecies();
-    let clientList = [
-      'sad', 'qwe', 'sdf'
-    ];
+    this.props.deliveryMenActions.loadDeliveryMen();
+    this.props.clientActions.loadClients();
+  }
 
-    let clientList2 = [
-      'tero', 'pepo', 'kaka'
-    ];
-
-    this.setState({ sortedClients: clientList, missingClients: clientList2 });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.clients) {
+      this.setState( { missingClients: this.clientsToShow(nextProps.clients),
+                       allClients: nextProps.clients } );
+    }
   }
 
   onSubmit(e) {
     e.preventDefault();
+    this.getSortedClientsId();
     // this.validateForm(this.state.animal);
     // if (valid.notErrors(this.state.errors)) {
     //   this.setState({ loading: true });
@@ -73,6 +78,7 @@ class DeliveryRoutesModal extends Component {
   }
 
   itemClicked(event, item) {
+    this.getClientId(this.state.allClients, item);
     this.setState({ clickedItem: item === this.state.clickedItem ? undefined : item });
     
   }
@@ -121,12 +127,44 @@ class DeliveryRoutesModal extends Component {
     }
   }
 
-  render() {
-    var options = [
-      { value: 'one', label: 'One' },
-      { value: 'two', label: 'Two' }
-    ];
+  deliveryMenToShow(deliveryMen) {
+    var listToShow = [];
+    for (let deliveryMan of deliveryMen) {
+      listToShow.push({ value: deliveryMan.name,
+                        label: deliveryMan.name });
+    }
 
+    return listToShow;
+  }
+
+  clientsToShow(clients) {
+    var listToShow = [];
+    for (let client of clients) {
+      listToShow.push(client.name);
+    }
+
+    return listToShow;
+  }
+
+  getSortedClientsId() {
+    let getClientId = function(clientList, clientName) {
+                        let selectedClient = clientList.filter(function (cli) {
+                          return cli.name === clientName;
+                        })[0];
+
+                        return selectedClient.id;
+                      }
+
+    let allClients = this.state.allClients;
+
+    let clientsId = this.state.sortedClients.map(function (obj) {
+      return getClientId(allClients, obj);
+    });
+
+    return clientsId;
+  }
+
+  render() {
     return (
       <div id="routes-modal">
         <Modal.Header>
@@ -139,7 +177,7 @@ class DeliveryRoutesModal extends Component {
               <Select
                   name="form-field-name"
                   value={ this.state.selectedDeliveryMan }
-                  options={ options }
+                  options={ this.deliveryMenToShow(this.props.deliveryMen) }
                   onChange={ this.selectChanged }
               />
             </Col>
@@ -152,28 +190,39 @@ class DeliveryRoutesModal extends Component {
               />
             </Col>
           </Row>
+          <Row>
+            <Col xs={12}>
+              <FormGroup controlId="description">              
+                <FormControl type="text" placeholder="Ingrese una descripción" />
+              </FormGroup>
+            </Col>
+          </Row>
           <div className="separator-line"></div>
           <Row id="clients-row">
             <Col sm={4} xs={12} className="col">
+              <h5>Clientes NO asignados</h5>
               <Reorder  list={ this.state.missingClients }
                         lock='horizontal'
                         template={ ClientItem } 
                         itemClass='list-item' 
-                        itemClicked={ this.itemClicked }
-                        selected={ this.state.clickedItem }
+                        itemClicked={ this.itemClicked }                        
+                        selected={ this.state.clickedItem }                      
                         disableReorder={ true }/>
             </Col>
             <Col sm={4} xs={12} className="col">
+              <br/>
+              <br/>
               <Button onClick={ this.addClient }>Agregar</Button>
               <br/>
               <br/>
               <Button bsStyle="danger" onClick={ this.removeClient }>Quitar</Button>
             </Col>
             <Col sm={4} xs={12} className="col">
+              <h5>Clientes por orden de entrega</h5>
               <Reorder  list={ this.state.sortedClients } 
                         lock='horizontal' 
                         template={ ClientItem } 
-                        itemClass='list-item' 
+                        itemClass='list-item'                        
                         itemClicked={ this.itemClicked2 }
                         selected={ this.state.clickedItem2 }
                         holdTime='100'
@@ -183,7 +232,7 @@ class DeliveryRoutesModal extends Component {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={ this.onClose } bsStyle="primary">Guardar</Button>
+          <Button onClick={ this.onSubmit } bsStyle="primary">Guardar</Button>
           <Button onClick={ this.onClose }>Cancelar</Button>
         </Modal.Footer>
       </div>
@@ -191,4 +240,20 @@ class DeliveryRoutesModal extends Component {
   }
 }
 
-export default DeliveryRoutesModal;
+const { array } = PropTypes;
+
+DeliveryRoutesModal.propTypes = {
+  deliveryMen: array.isRequired
+};
+
+const mapState = (state) => ({ deliveryMen: state.deliveryMen,
+                               clients: state.clients });
+
+const mapDispatch = (dispatch) => {
+  return {
+    deliveryMenActions: bindActionCreators(deliveryMen, dispatch),
+    clientActions: bindActionCreators(clients, dispatch)
+  };
+};
+
+export default connect(mapState, mapDispatch)(DeliveryRoutesModal);

@@ -65,10 +65,10 @@ class PresalePage extends Component {
   salesToShow(salesList) {
     let listToShow = [];
     for (let sale of salesList) {
-      listToShow.push({ client: sale.client.name,
+      listToShow.push({ client: sale.client != null ? sale.client.name : '',
                         id: sale.id,
                         creationDate: sale.creationDate,
-                        salesman: sale.salesman.userName,
+                        salesman: sale.salesman != null ? sale.salesman.userName : '',
                         price: sale.price
                          });
     }

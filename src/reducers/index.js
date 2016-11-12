@@ -7,6 +7,8 @@ import sales from './salesReducer';
 import sale from './saleReducer';
 import products from './productsReducer';
 import routes from './routesReducer';
+import deliveryMen from './deliveryMenReducer';
+import clients from './clientsReducer';
 import { reducer as notifications } from 'react-notification-system-redux';
 
 const rootReducer = combineReducers({
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   products,
   notifications,
   routes,
+  deliveryMen,
+  clients,
   routing: routerReducer
 });
 

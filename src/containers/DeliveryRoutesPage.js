@@ -24,6 +24,8 @@ class DeliveryRoutesPage extends Component {
       this.setState({ loadingRoutes: true });
       this.props.actions.loadDeliveryRoutes();
     }
+    let numberValue = value ? 1 : 0;
+    this.props.actions.updateRouteMode(numberValue);
   }
 
   componentWillReceiveProps(nextProps) {
