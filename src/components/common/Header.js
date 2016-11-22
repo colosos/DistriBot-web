@@ -42,7 +42,7 @@ class Header extends Component {
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/" className="imageheader">
-               <Image src="../../resources/white-brain-gears.png"/>
+               <Image src="https://frontendwebresources.blob.core.windows.net/webimages/white-brain-gears.png"/>
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle/>

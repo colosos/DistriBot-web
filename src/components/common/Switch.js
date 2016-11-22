@@ -6,11 +6,18 @@ class DBSwitch extends Component {
 
   constructor(props, context) {
     super(props, context);
-
+    
     this.state = {
       textValue: 'AUTOMÁTICO'
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      textValue: nextProps.checked ? 'MANUAL' : 'AUTOMÁTICO'
+    });
+  }
+
 
   onSwitchChange() {
     this.props.onChange(this.state.textValue == 'AUTOMÁTICO');
@@ -24,13 +31,12 @@ class DBSwitch extends Component {
   render() {
     return (
       <div>
-        <Switch onChange={ this.onSwitchChange.bind(this) }/>
+        <Switch checked={ this.props.checked } onChange={ this.onSwitchChange.bind(this) }/>
         <br/>
         <div className="switch-label">
           <b>Modo { this.state.textValue }</b>
         </div>  
       </div>
-      
     );
   }
 }

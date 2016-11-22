@@ -14,23 +14,27 @@ class DeliveryRoutesPage extends Component {
 
     this.state = {
       manualMode: false,
-      loadingRoutes: false
+      loadingRoutes: true
     }
+  }
+
+  componentWillMount() {
+    this.props.actions.getRouteMode();
+    this.props.actions.loadDeliveryRoutes();
   }
 
   switchDidChanged(value) {
     this.setState({ manualMode: value });
-    if (value) {
-      this.setState({ loadingRoutes: true });
-      this.props.actions.loadDeliveryRoutes();
-    }
-    let numberValue = value ? 1 : 0;
+    let numberValue = value ? 0 : 1;
     this.props.actions.updateRouteMode(numberValue);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.routes) {
       this.setState({ loadingRoutes: false });
+    }
+    if (nextProps.manualMode) {
+      this.setState({ manualMode: nextProps.manualMode });
     }
   }
 
@@ -52,7 +56,7 @@ class DeliveryRoutesPage extends Component {
             </p>
           </Col>
           <Col sm={3} xs={12} className="switch-wrapper">
-            <DBSwitch onChange={ this.switchDidChanged.bind(this) }/>
+            <DBSwitch checked={ this.state.manualMode } onChange={ this.switchDidChanged.bind(this) }/>
           </Col> 
         </Row>
         { this.state.manualMode ? (
@@ -73,7 +77,12 @@ DeliveryRoutesPage.propTypes = {
   routes: array.isRequired
 };
 
-const mapState = (state) => ({ routes: state.routes });
+const mapState = (state) => {
+  return {
+    routes: state.routesPage.routes,
+    manualMode: state.routesPage.manualMode
+  };
+};
 
 const mapDispatch = (dispatch) => {
   return {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import '../styles/dashboard.scss'
 
 class DashboardPage extends Component {
   constructor(props, context) {
@@ -9,11 +10,11 @@ class DashboardPage extends Component {
   render() {
     return (
       <div>
-        <iframe width="680"
-                height="510" 
-                src="https://app.powerbi.com/view?r=eyJrIjoiMTcxYTc0NzQtYTA5MS00N2FjLTllNDItMTlkZDJiOWY3ODVmIiwidCI6ImIxNDcxYmQyLTMxOTEtNDRjYS05NjI5LTk0OWMyOWQ4Zjg4YyIsImMiOjR9"
-                frameborder="0"
-                allowFullScreen="true">
+        <iframe
+          id="main-frame"
+          src="https://app.powerbi.com/view?r=eyJrIjoiMDdkMWRiMDUtOWRhMi00MGQ1LTg3MjctZDI0MWE4MTQyNGFmIiwidCI6ImIxNDcxYmQyLTMxOTEtNDRjYS05NjI5LTk0OWMyOWQ4Zjg4YyIsImMiOjR9"
+          frameBorder="0"
+          allowFullScreen="true">
         </iframe>
       </div>
     );

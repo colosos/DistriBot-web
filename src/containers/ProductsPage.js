@@ -7,7 +7,7 @@ import '../styles/products.scss';
 import DatePicker from 'react-datepicker';
 import Spinner from '../components/common/SpinnerComponent';
 import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.min.css';
+import '../styles/react-datepicker.scss';
 import { quantitySorter } from '../util/dataSorter'
 
 class ProductsPage extends Component {

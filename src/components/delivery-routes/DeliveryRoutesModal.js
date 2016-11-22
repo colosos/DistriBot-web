@@ -4,15 +4,13 @@ import { bindActionCreators } from 'redux';
 import Spinner from 'react-spinkit';
 import { Col, Row } from 'react-bootstrap';
 import { Modal, Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
 import ClientItem from '../common/ClientItem';
 import Select from 'react-select';
-import moment from 'moment';
 import Reorder from 'react-reorder';
 import * as deliveryMen from '../../actions/deliveryMenActions';
 import * as clients from '../../actions/clientsActions';
-import 'react-datepicker/dist/react-datepicker.min.css';
-import 'react-select/dist/react-select.css';
+import * as routes from '../../actions/routesActions';
+import * as dates from '../../constants/datesConstants';
 import '../../styles/delivery-routes-modal.scss';
 
 class DeliveryRoutesModal extends Component {
@@ -20,8 +18,9 @@ class DeliveryRoutesModal extends Component {
     super(props, context);
 
     this.state = {
-      date: moment(),
-      selectedDeliveryMan: "",
+      selectedDeliveryMan: 0,
+      description: '',
+      selectedDay: 0,
       clickedItem: '',
       clickedItem2: '',
       missingClients: [],
@@ -32,12 +31,13 @@ class DeliveryRoutesModal extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onClose = this.onClose.bind(this);
     this.selectChanged = this.selectChanged.bind(this);
-    this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.selectDayChanged = this.selectDayChanged.bind(this);
     this.itemClicked = this.itemClicked.bind(this);
     this.itemClicked2 = this.itemClicked2.bind(this);
     this.didReordered = this.didReordered.bind(this);
     this.addClient = this.addClient.bind(this);
     this.removeClient = this.removeClient.bind(this);
+    this.changeDescription = this.changeDescription.bind(this);
   }
 
   componentWillMount() {
@@ -54,16 +54,17 @@ class DeliveryRoutesModal extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.getSortedClientsId();
-    // this.validateForm(this.state.animal);
-    // if (valid.notErrors(this.state.errors)) {
-    //   this.setState({ loading: true });
-    //   this.props.actions.sendAnimalForm(this.state.animal);
-    // }
+    let clientsId = this.getSortedClientsId();
+    let deliveryManId = this.state.selectedDeliveryMan.value;
+
+    this.props.routesActions.createRoute(deliveryManId,
+                              this.state.description,
+                              this.state.selectedDay.value,
+                              clientsId);
+
   }
 
   onClose() {
-    //this.props.actions.cancelAnimalForm();
     this.props.onClose();
   }
 
@@ -71,14 +72,11 @@ class DeliveryRoutesModal extends Component {
     this.setState({ selectedDeliveryMan: value });
   }
 
-  handleChangeDate(newDate) {
-    this.setState({
-      date: newDate
-    })
+  selectDayChanged(value) {
+    this.setState({ selectedDay: value });
   }
 
-  itemClicked(event, item) {
-    this.getClientId(this.state.allClients, item);
+  itemClicked(event, item) {    
     this.setState({ clickedItem: item === this.state.clickedItem ? undefined : item });
     
   }
@@ -89,6 +87,10 @@ class DeliveryRoutesModal extends Component {
 
   didReordered(event, itemThatHasBeenMoved, itemsPreviousIndex, itemsNewIndex, reorderedArray) {
     this.setState({ sortedClients: reorderedArray });
+  }
+
+  changeDescription(e) {
+    this.setState({ description: e.target.value });
   }
 
   addClient() {
@@ -130,7 +132,7 @@ class DeliveryRoutesModal extends Component {
   deliveryMenToShow(deliveryMen) {
     var listToShow = [];
     for (let deliveryMan of deliveryMen) {
-      listToShow.push({ value: deliveryMan.name,
+      listToShow.push({ value: deliveryMan.id,
                         label: deliveryMan.name });
     }
 
@@ -182,18 +184,18 @@ class DeliveryRoutesModal extends Component {
               />
             </Col>
             <Col sm={6} xs={12} className="col">
-              <DatePicker
-                className="form-control date-picker"
-                selected={ this.state.date }
-                onChange={ this.handleChangeDate }
-                dateFormat="DD/MM/YYYY"
+              <Select
+                  name="form-field-name"
+                  value={ this.state.selectedDay }
+                  options={ dates.DAYS_OF_WEEK }
+                  onChange={ this.selectDayChanged }
               />
             </Col>
           </Row>
           <Row>
             <Col xs={12}>
               <FormGroup controlId="description">              
-                <FormControl type="text" placeholder="Ingrese una descripción" />
+                <FormControl type="text" placeholder="Ingrese una descripción" onChange={ this.changeDescription } />
               </FormGroup>
             </Col>
           </Row>
@@ -252,7 +254,8 @@ const mapState = (state) => ({ deliveryMen: state.deliveryMen,
 const mapDispatch = (dispatch) => {
   return {
     deliveryMenActions: bindActionCreators(deliveryMen, dispatch),
-    clientActions: bindActionCreators(clients, dispatch)
+    clientActions: bindActionCreators(clients, dispatch),
+    routesActions: bindActionCreators(routes, dispatch)
   };
 };
 

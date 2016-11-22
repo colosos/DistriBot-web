@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   sale,
   products,
   notifications,
-  routes,
+  routesPage: routes,
   deliveryMen,
   clients,
   routing: routerReducer

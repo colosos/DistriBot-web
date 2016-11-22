@@ -43,8 +43,8 @@ class Api {
   }
 
   addTokenHeader() {
-    let current_session = session.loadSession();
-    return (current_session && current_session.access_token) ? { 'Authorization': 'bearer ' + current_session.access_token } : {};
+    // let current_session = session.loadSession();
+    // return (current_session && current_session.access_token) ? { 'Authorization': 'bearer ' + current_session.access_token } : {};
   }
 
   get(uri) {
