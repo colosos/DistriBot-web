@@ -61,7 +61,7 @@ class DeliveryRoutesModal extends Component {
                               this.state.description,
                               this.state.selectedDay.value,
                               clientsId);
-
+    this.props.onClose();
   }
 
   onClose() {

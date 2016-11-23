@@ -20,7 +20,7 @@ export const loadDeliveryRoutes = () => {
 
 export const createRouteSuccess = (response) => {
   return {
-    type: types.LOAD_ROUTES_SUCCESS,
+    type: types.CREATE_ROUTE_SUCCESS,
     response
   };
 };
@@ -37,9 +37,7 @@ export const createRoute = (driverId, description, dayOfWeek, clientsId) => {
       })
     }
 
-    console.log(JSON.stringify(route));
-
-    return delRouteApi.createNewRoute().then((route) => {
+    return delRouteApi.createNewRoute(route).then((route) => {
       dispatch(createRouteSuccess(route));
     }).catch(err => {
       throw (err);
@@ -47,10 +45,17 @@ export const createRoute = (driverId, description, dayOfWeek, clientsId) => {
   }
 };
 
+export const removeRouteSuccess = (response) => {
+  return {
+    type: types.REMOVE_ROUTE_SUCCESS,
+    response
+  };
+};
+
 export const removeRoute = (routeId) => {
   return (dispatch) => {
-    return delRouteApi.removeRoute(routeId).then(() => {
-      console.log("Se borró la ruta exitosamente");
+    return delRouteApi.removeRoute(routeId).then((route) => {
+      dispatch(removeRouteSuccess(route));
     }).catch(err => {
       throw (err);
     });
