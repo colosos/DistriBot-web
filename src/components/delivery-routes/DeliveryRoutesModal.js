@@ -60,7 +60,7 @@ class DeliveryRoutesModal extends Component {
 
     this.props.routesActions.createRoute(deliveryManId,
                               this.state.description,
-                              this.state.selectedDay.value,
+                              this.state.selectedDay,
                               clientsId);
     this.props.onClose();
   }

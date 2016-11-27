@@ -9,7 +9,7 @@ import { dateSorter } from '../util/dataSorter'
 import Spinner from '../components/common/SpinnerComponent';
 import SaleDetails from '../components/sale/SaleDetails';
 
-//import Notifications from 'react-notification-system-redux';
+// import Notifications from 'react-notification-system-redux';
 
 // const notificationOpts = {
 //   // uid: 'once-please', // you can specify your own uid if required
@@ -33,7 +33,7 @@ class PresalePage extends Component {
       orderId: 0
     };
 
-    //this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
     this.onRowSelect = this.onRowSelect.bind(this);
   }
 
@@ -78,8 +78,6 @@ class PresalePage extends Component {
 
   render() {
     const { sales } = this.props;
-
-    //const { notifications } = this.props;
 
     var selectRowProp = {
       mode: "radio",
