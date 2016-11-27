@@ -38,11 +38,12 @@ class DeliveryRoutesModal extends Component {
     this.addClient = this.addClient.bind(this);
     this.removeClient = this.removeClient.bind(this);
     this.changeDescription = this.changeDescription.bind(this);
+    this.getDistance = this.getDistance.bind(this);
   }
 
   componentWillMount() {
     this.props.deliveryMenActions.loadDeliveryMen();
-    this.props.clientActions.loadClients();
+    this.props.clientActions.loadClientsWithoutRoute(this.state.selectedDay);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,12 +74,12 @@ class DeliveryRoutesModal extends Component {
   }
 
   selectDayChanged(value) {
-    this.setState({ selectedDay: value });
+    this.setState({ selectedDay: value.value });
+    this.props.clientActions.loadClientsWithoutRoute(value.value);
   }
 
   itemClicked(event, item) {    
     this.setState({ clickedItem: item === this.state.clickedItem ? undefined : item });
-    
   }
 
   itemClicked2(event, item) {
@@ -142,10 +143,16 @@ class DeliveryRoutesModal extends Component {
   clientsToShow(clients) {
     var listToShow = [];
     for (let client of clients) {
-      listToShow.push(client.name);
+      if (client.name) {
+        listToShow.push(client.name);
+      }
     }
 
     return listToShow;
+  }
+
+  areClientsToShow() {
+    return this.state.missingClients.length + this.state.sortedClients.length > 0
   }
 
   getSortedClientsId() {
@@ -164,6 +171,10 @@ class DeliveryRoutesModal extends Component {
     });
 
     return clientsId;
+  }
+
+  getDistance() {
+    this.props.routesActions.getDistance(this.getSortedClientsId());
   }
 
   render() {
@@ -200,6 +211,7 @@ class DeliveryRoutesModal extends Component {
             </Col>
           </Row>
           <div className="separator-line"></div>
+          { this.areClientsToShow() ? (
           <Row id="clients-row">
             <Col sm={4} xs={12} className="col">
               <h5>Clientes NO asignados</h5>
@@ -229,8 +241,18 @@ class DeliveryRoutesModal extends Component {
                         selected={ this.state.clickedItem2 }
                         holdTime='100'
                         callback={ this.didReordered }/>
+              <br/>
+              {this.state.sortedClients.length > 0 ? (
+                <Row id="distance-row">
+                  <Button onClick={ this.getDistance }>
+                    <i className="material-icons">update</i>
+                  </Button>
+                  <span>{ this.props.distance }</span>
+                </Row>
+                ) : ''}
             </Col>
           </Row>
+          ) : ('No hay clientes con pedidos pendientes para el dia seleccionado.')}
         </Modal.Body>
 
         <Modal.Footer>
@@ -249,7 +271,8 @@ DeliveryRoutesModal.propTypes = {
 };
 
 const mapState = (state) => ({ deliveryMen: state.deliveryMen,
-                               clients: state.clients });
+                               clients: state.clients,
+                               distance: state.routesModal.distance });
 
 const mapDispatch = (dispatch) => {
   return {

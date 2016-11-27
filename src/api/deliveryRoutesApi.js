@@ -14,16 +14,24 @@ class DeliveryRoute {
     return api.get(`${consts.API_URL}api/Routes`);
   }
 
-  static getDeliveryMen() {
-  	return api.get(`${consts.API_URL}api/DeliveryMen`);
-  }
-
   static createNewRoute(newRoute) {
   	return api.post(`${consts.API_URL}api/Routes`, newRoute);
   }
 
   static removeRoute(routeId) {
     return api.delete(`${consts.API_URL}api/Routes/` + routeId, '');
+  }
+
+  static getDeliveryMen() {
+    return api.get(`${consts.API_URL}api/DeliveryMen`);
+  }
+
+  static getClientsWithoutRoute(dayOfWeek) {
+    return api.get(`${consts.API_URL}api/ClientsWithoutRoute?dw=` + dayOfWeek);
+  }
+
+  static getDistance(clientsId) {
+    return api.post(`${consts.API_URL}api/EvaluateRoute`, clientsId);
   }
 }
 

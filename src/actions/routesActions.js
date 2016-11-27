@@ -62,6 +62,27 @@ export const removeRoute = (routeId) => {
   };
 };
 
+export const getDistanceSuccess = (response) => {
+  return {
+    type: types.LOAD_DISTANCE_SUCCESS,
+    response
+  };
+};
+
+export const getDistance = (clientsId) => {
+  let clientsIdJson = clientsId.map(function(clientId) {
+    return { id: clientId }
+  })
+
+  return (dispatch) => {
+    return delRouteApi.getDistance(clientsIdJson).then((response) => {
+      dispatch(getDistanceSuccess(response));
+    }).catch(err => {
+      throw (err);
+    });
+  };
+};
+
 export const loadRouteModeSuccess = (response) => {
   return {
     type: types.LOAD_ROUTE_MODE_SUCCESS,

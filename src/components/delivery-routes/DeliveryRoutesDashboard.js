@@ -32,7 +32,6 @@ class DeliveryRoutesDashboard extends Component {
 
   cleanRoutesData(routesList) {
     var listToShow = [];
-    console.log(routesList);
     for (let route of routesList) {
       listToShow.push({
         id: route.id,

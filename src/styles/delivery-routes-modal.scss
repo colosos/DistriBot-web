@@ -26,6 +26,17 @@
 	.list-item.selected {
 		border: #df1f1f 2px solid;
 	}
+
+  #distance-row {
+    border-top: solid 1px #ccc;
+    padding: 10px;
+
+    span {
+      margin: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
 }
 
 /**

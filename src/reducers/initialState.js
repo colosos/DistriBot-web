@@ -20,6 +20,9 @@ export default {
     routes: [],
     manualMode: false
   },
+  routesModal: {
+    distance: -1
+  },
   deliveryMen: [],
   clients: []
 };
