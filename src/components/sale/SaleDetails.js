@@ -62,7 +62,7 @@ class SaleDetails extends Component {
                 <br/>
                 <h4>Precio total: ${ sale.price }</h4>
                 <br/>
-                <h5>Vendedor: { sale.salesman.name } ({ sale.salesman.userName })</h5>
+                <h5>Vendedor: { sale.salesman != null ? sale.salesman.name : '' } ({ sale.salesman != null ? sale.salesman.userName : '' })</h5>
               </Modal.Body>
 
               <Modal.Footer>

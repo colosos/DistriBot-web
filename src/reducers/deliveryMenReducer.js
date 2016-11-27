@@ -1,13 +1,13 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-const productsReducer = (state = initialState.products, action) => {
+const deliveryMenReducer = (state = initialState.deliveryMen, action) => {
   switch (action.type) {
-    case types.LOAD_PRODUCTS_SUCCESS:
+    case types.LOAD_DELIVERY_MEN_SUCCESS:
       return action.response;
     default:
       return state;
   }
 };
 
-export default productsReducer;
+export default deliveryMenReducer;

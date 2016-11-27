@@ -5,7 +5,7 @@ const LogoHeader = (props) => {
   return (
     <div className="contenedor-header">
       <h2 className="title">DistriBot</h2>
-      <img className="image-header" src="../../resources/blue-brain-gears.png" />
+      <img className="image-header" src="https://frontendwebresources.blob.core.windows.net/webimages/blue-brain-gears.png" />
       <p className="title-header dark-grey-color">{props.title}</p>
     </div>
   );

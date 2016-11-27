@@ -1,4 +1,11 @@
 .table-wrapper {
 	max-width: 1000px;
 	margin: auto;
+	padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+	#products-header {
+		text-align: center;	
+	}
 }

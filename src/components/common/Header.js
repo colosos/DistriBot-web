@@ -42,7 +42,7 @@ class Header extends Component {
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/" className="imageheader">
-               <Image src="../../resources/white-brain-gears.png"/>
+               <Image src="https://frontendwebresources.blob.core.windows.net/webimages/white-brain-gears.png"/>
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle/>
@@ -70,6 +70,14 @@ class Header extends Component {
                   to="/estadisticas"
                   onClick={this.onClickLink}>
               ESTADISTICAS
+            </Link>
+          </ul>
+          <ul className="nav navbar-nav item">
+            <Link activeClassName="active-link"
+                  className="header-link"
+                  to="/rutas"
+                  onClick={this.onClickLink}>
+              RUTAS DE REPARTO
             </Link>
           </ul>
           <ul className="nav navbar-nav navbar-right">

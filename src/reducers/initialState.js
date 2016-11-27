@@ -16,4 +16,13 @@ export default {
   sales: [],
   sale: {},
   products: [],
+  routesPage: {
+    routes: [],
+    manualMode: false
+  },
+  routesModal: {
+    distance: -1
+  },
+  deliveryMen: [],
+  clients: []
 };

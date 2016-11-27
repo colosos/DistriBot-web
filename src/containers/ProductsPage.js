@@ -7,7 +7,7 @@ import '../styles/products.scss';
 import DatePicker from 'react-datepicker';
 import Spinner from '../components/common/SpinnerComponent';
 import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.min.css';
+import '../styles/react-datepicker.scss';
 import { quantitySorter } from '../util/dataSorter'
 
 class ProductsPage extends Component {
@@ -60,16 +60,19 @@ class ProductsPage extends Component {
 
     return (
       <div className="table-wrapper">
-        <h2>Lista de productos faltantes para el { this.state.date.format("DD/MM/YYYY") }</h2>
-        <p>
-        Aquí ud podrá consultar los productos y la cantidad que necesita comprar,
-        para poder cumplir con las entregas acordadas hasta la fecha que indique en el siguiente campo:
-        </p>
-        <DatePicker
-          selected={this.state.date}
-          onChange={this.handleChangeDate.bind(this)}
-          dateFormat="DD/MM/YYYY"
-          />
+        <div id="products-header">
+          <h2>Lista de productos faltantes para el { this.state.date.format("DD/MM/YYYY") }</h2>
+          <p>
+          Aquí ud podrá consultar los productos y la cantidad que necesita comprar,
+          para poder cumplir con las entregas acordadas hasta la fecha que indique en el siguiente campo:
+          </p>
+          <DatePicker
+            className="form-control"
+            selected={this.state.date}
+            onChange={this.handleChangeDate.bind(this)}
+            dateFormat="DD/MM/YYYY"
+            />
+        </div>
         {this.state.loading ? (<Spinner active={this.state.loading} />) : (
         <BootstrapTable data={this.productsToShow(products)} striped={true} hover={true} search={true} pagination={true}>
           <TableHeaderColumn dataField="id" isKey={true} dataSort={true}>Código</TableHeaderColumn>
