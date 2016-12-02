@@ -28,6 +28,7 @@ class DeliveryRoutesModal extends Component {
       allClients: []
     }
 
+    this.evaluatingRoute = false;
     this.onSubmit = this.onSubmit.bind(this);
     this.onClose = this.onClose.bind(this);
     this.selectChanged = this.selectChanged.bind(this);
@@ -47,10 +48,11 @@ class DeliveryRoutesModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.clients) {
+    if (nextProps.clients && !this.evaluatingRoute) {
       this.setState( { missingClients: this.clientsToShow(nextProps.clients),
                        allClients: nextProps.clients } );
     }
+    this.evaluatingRoute = false;
   }
 
   onSubmit(e) {
@@ -174,6 +176,7 @@ class DeliveryRoutesModal extends Component {
   }
 
   getDistance() {
+    this.evaluatingRoute = true;
     this.props.routesActions.getDistance(this.getSortedClientsId());
   }
 
@@ -247,7 +250,7 @@ class DeliveryRoutesModal extends Component {
                   <Button onClick={ this.getDistance }>
                     <i className="material-icons">update</i>
                   </Button>
-                  <span>{ this.props.distance }</span>
+                  <span>{ this.props.distance } KM</span>
                 </Row>
                 ) : ''}
             </Col>
