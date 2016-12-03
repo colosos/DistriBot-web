@@ -21,7 +21,7 @@ export default {
     manualMode: false
   },
   routesModal: {
-    distance: -1
+    distance: '-'
   },
   deliveryMen: [],
   clients: []

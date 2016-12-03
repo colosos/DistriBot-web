@@ -9,20 +9,6 @@ import { dateSorter } from '../util/dataSorter'
 import Spinner from '../components/common/SpinnerComponent';
 import SaleDetails from '../components/sale/SaleDetails';
 
-//import Notifications from 'react-notification-system-redux';
-
-// const notificationOpts = {
-//   // uid: 'once-please', // you can specify your own uid if required
-//   title: 'Hey, it\'s good to see you!',
-//   message: 'Now you can see how easy it is to use notifications in React!',
-//   position: 'tr',
-//   autoDismiss: 0,
-//   action: {
-//     label: 'Click me!!',
-//     callback: () => alert('clicked!')
-//   }
-// };
-
 class PresalePage extends Component {
   constructor(props, context) {
     super(props, context);
@@ -33,15 +19,8 @@ class PresalePage extends Component {
       orderId: 0
     };
 
-    //this.handleClick = this.handleClick.bind(this);
     this.onRowSelect = this.onRowSelect.bind(this);
   }
-
-  // handleClick() {
-  //   this.context.store.dispatch(
-  //     Notifications.error(notificationOpts)
-  //   );
-  // }
 
   componentWillMount() {
     this.props.actions.loadPreSales();
@@ -78,8 +57,6 @@ class PresalePage extends Component {
 
   render() {
     const { sales } = this.props;
-
-    //const { notifications } = this.props;
 
     var selectRowProp = {
       mode: "radio",

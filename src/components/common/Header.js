@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as logoutActions from '../../actions/logoutActions';
 import * as userActions from '../../actions/userActions';
 import * as session from '../../actions/sessionActions';
+import * as consts from '../../constants/apiConstants.js';
 import '../../styles/header.scss';
 
 class Header extends Component {
@@ -42,7 +43,7 @@ class Header extends Component {
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/" className="imageheader">
-               <Image src="https://frontendwebresources.blob.core.windows.net/webimages/white-brain-gears.png"/>
+               <Image src={ consts.WHITE_BRAIN_URL }/>
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle/>
@@ -67,9 +68,9 @@ class Header extends Component {
           <ul className="nav navbar-nav item">
             <Link activeClassName="active-link"
                   className="header-link"
-                  to="/estadisticas"
+                  to="/reportes"
                   onClick={this.onClickLink}>
-              ESTADISTICAS
+              REPORTES
             </Link>
           </ul>
           <ul className="nav navbar-nav item">

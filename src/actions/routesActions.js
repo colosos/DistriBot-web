@@ -90,7 +90,7 @@ export const loadRouteModeSuccess = (response) => {
   };
 };
 
-export const getRouteMode = (value) => {
+export const getRouteMode = () => {
   return (dispatch) => {
     return delRouteApi.getRouteMode().then((param) => {
       dispatch(loadRouteModeSuccess(param));
@@ -101,7 +101,7 @@ export const getRouteMode = (value) => {
 };
 
 export const updateRouteMode = (value) => {
-  return (dispatch) => {
+  return () => {
     return delRouteApi.updateRouteMode(value).then(() => {
       console.log("Se actualizó el modo de ruteo exitosamente");
     }).catch(err => {
