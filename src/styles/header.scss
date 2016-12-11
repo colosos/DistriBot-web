@@ -88,6 +88,31 @@
   padding: 0;
 }
 
+.material-icons.icon,
+.material-label {
+  font-size: 3em;
+  line-height: 1;
+  display: block;
+  color: #424242;
+  margin: .5em 0
+}
+
+.mdl-badge {
+  margin-right: 12px;  
+}
+
+.material-icons.mdl-badge[data-badge]::after,
+.material-label.mdl-badge[data-badge]::after{
+  font-size: .5em;
+  width: 2em;
+  height: 2em;
+}
+
+.material-icons.mdl-badge[data-badge]::after {
+  top: -1em;
+  right: -1em;
+}
+
 @media (min-width: 768px) {
   #app .container {
     width: 100%;

@@ -24,5 +24,6 @@ export default {
     distance: '-'
   },
   deliveryMen: [],
-  clients: []
+  clients: [],
+  anomalies: []
 };

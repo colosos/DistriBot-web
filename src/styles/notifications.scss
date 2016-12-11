@@ -1,0 +1,17 @@
+.row.positive {
+	background-color: #C5E3BF;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid green;
+}
+
+.row.negative {
+	background-color: #FFB5B5;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid red;
+}
+
+i.timestamp {
+	float: right;
+}
