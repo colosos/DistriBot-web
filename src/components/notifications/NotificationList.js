@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import NotificationItem from './NotificationItem';
+import Spinner from '../common/SpinnerComponent';
 import * as notificationsActions from '../../actions/notificationsActions';
+import moment from 'moment';
 
 class NotificationList extends Component {
   constructor(props, context) {
@@ -25,12 +27,14 @@ class NotificationList extends Component {
 
   cleanNotificationsData(notificationList) {
     var listToShow = [];
+
     for (let not of notificationList) {
-      // listToShow.push({
-      //   id: route.id,
-      //   driver: route.driver.name,
-      //   dayOfWeek: route.dayOfWeek
-      // });
+      listToShow.push({
+        id: not.id + listToShow.length,
+        isPositive: not.isPositive,
+        diff: Math.abs(not.diff).toFixed(2),
+        date: not.startDate
+      });
     }
 
     return listToShow;
@@ -38,7 +42,8 @@ class NotificationList extends Component {
 
   render() {
     const { notifications } = this.props
-    let animalList = notifications.map(notification => {
+    let cleanNotifications = this.cleanNotificationsData(notifications);
+    let animalList = cleanNotifications.map(notification => {
       return (
         <NotificationItem key={ notification.id } item={ notification } />
       );
@@ -46,7 +51,7 @@ class NotificationList extends Component {
 
     return (
       <div>
-        { animalList }
+        { this.state.loading ? (<Spinner active={ this.state.loading } />) : animalList }
       </div>      
     );
   }

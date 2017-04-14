@@ -83,7 +83,7 @@ class Header extends Component {
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <Link to="/notificaciones" onClick={this.onClickLink}>
-              <i className="material-icons mdl-badge" data-badge="2">notifications</i>
+              <i className="material-icons">notifications</i>
             </Link>
             <span className="header-span">&nbsp;|&nbsp;</span>
             <Link to="/perfil" onClick={this.onClickLink}>

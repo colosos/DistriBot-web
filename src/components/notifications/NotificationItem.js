@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import '../../styles/notifications.scss'
+import { previousMonday, getDateString } from '../../util/dataFormatter';
+import '../../styles/notifications.scss';
+
 
 class NotificationItem extends Component {
   constructor(props, context) {
@@ -11,13 +13,15 @@ class NotificationItem extends Component {
     const { item } = this.props;
 
     var anomalyTipe = 'negative'
-    var title = 'Ventas INFERIORES a lo esperado en $' + item.diff
-    var description = 'Se detectó un resultado inesperado, es necesario detectar la causa para tomar medidas correctivas'
+    var title = 'BAJAS VENTAS'
+    var description = 'Las ventas fueron INFERIORES a lo esperado con una diferencia de $' + item.diff
+    let lastSunday = item.date.substring(0, 10)
+    let datesRange = previousMonday(lastSunday) + ' -- ' + getDateString(lastSunday)
 
     if (item.isPositive) {
       anomalyTipe = 'positive'
-      title = 'Ventas SUPERIORES a lo esperado en $' + item.diff
-      description = 'Si bien son buenas noticias se recomienda buscar la causa del incremento en las ventas inesperado'
+      title = 'BUENAS VENTAS'
+      description = 'Las ventas fueron SUPERIORES a lo esperado con una diferencia de $' + item.diff
     }
 
     return (
@@ -29,7 +33,7 @@ class NotificationItem extends Component {
           <span>{ description }</span>
         </Col>
         <Col sm={2} xs={12}>
-          <i className='timestamp'>{ item.start_date + ' - ' + item.end_date }</i>
+          <i className='timestamp'>{ datesRange }</i>
         </Col>
       </Row>
     );
