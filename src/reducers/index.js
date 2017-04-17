@@ -10,6 +10,7 @@ import routes from './routesReducer';
 import routesModal from './routesModalReducer';
 import deliveryMen from './deliveryMenReducer';
 import clients from './clientsReducer';
+import anomalies from './notificationsReducer';
 import { reducer as notifications } from 'react-notification-system-redux';
 
 const rootReducer = combineReducers({
@@ -23,9 +24,9 @@ const rootReducer = combineReducers({
   routesPage: routes,
   routesModal,
   deliveryMen,
+  anomalies,
   clients,
   routing: routerReducer,
-
 });
 
 export default rootReducer;
