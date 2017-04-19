@@ -81,11 +81,15 @@ class Header extends Component {
               RUTAS DE REPARTO
             </Link>
           </ul>
-          <ul className="nav navbar-nav navbar-right">
-            <Link to="/notificaciones" onClick={this.onClickLink}>
-              <i className="material-icons">notifications</i>
+          <ul className="nav navbar-nav item">
+            <Link activeClassName="active-link"
+                  className="header-link"
+                  to="/notificaciones"
+                  onClick={this.onClickLink}>
+              ANOMALÍAS
             </Link>
-            <span className="header-span">&nbsp;|&nbsp;</span>
+          </ul>
+          <ul className="nav navbar-nav navbar-right">
             <Link to="/perfil" onClick={this.onClickLink}>
               <i className="material-icons">account_circle</i>
               <span className="header-span"> Hola {username}</span>
